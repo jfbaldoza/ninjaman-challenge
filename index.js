@@ -17,6 +17,9 @@ var worldDict = {
     2: 'sushi'
 }
 
+let points = document.getElementById('points')
+let score = 0
+
 function drawWorld() {
     output = "";
     for(var row = 0; row < world.length; row++) {
@@ -57,15 +60,17 @@ document.onkeydown = function(e){
         ninjaman.y--
         }
     }
-    else if(e.keyCode == 40){
+    if(e.keyCode == 40){
         if(world[ninjaman.y+1][ninjaman.x] !=1){
             ninjaman.y++
         }
     }
-
-
-
-    world[ninjaman.y][ninjaman.x] = 0;
+    if(world[ninjaman.y][ninjaman.x] == 2){ // kung yung ninjaman ay 2 
+        world[ninjaman.y][ninjaman.x] = 0;   // ninjaworld magiging 0
+        score++                             // pag world is 0 plus 1 sa score
+        points.innerText = score          
+    }
+    // world[ninjaman.y][ninjaman.x] = 0;
     drawNinjaman()
     drawWorld()
 }  
