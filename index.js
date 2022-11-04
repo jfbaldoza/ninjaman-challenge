@@ -1,16 +1,5 @@
-var world = [
-    // [1,1,1,1,1],
-    // [1,0,2,2,1],
-    // [1,3,1,2,1],
-    // [1,2,2,2,1],
-    // [1,2,2,2,1],
-    // [1,2,1,2,1],
-    // [1,2,2,2,1],
-    // [1,2,2,2,1],
-    // [1,2,1,2,1],
-    // [1,2,2,2,1],
-    // [1,1,1,1,1],
-];
+var world = [];
+
 var worldDict = {
     0: 'blank',
     1: 'wall',
@@ -27,18 +16,18 @@ var worldwidth = 15
 
 function drawWorld() {
     output = "";
-    for (var i=0; i<worldheight; i++){
-        world.push([i])
+    for (var row=0; row<=worldheight; row++){
+        world.push([1])
         output += "<div class = 'row'>"
 
-        for(var x=0; x<worldwidth; x++){
-            if(i == 0 || i == 14 || x == 0 || x == 14){
-                world[i].push(0)
-                output += "<div class = '"+ worldDict[1] +"'></div>"
+        for(var column=0; column<=worldwidth; column++){
+            if(row == 0 || row == 15 || column == -1 || column == 15){
+                output += "<div class = 'wall'></div>"
+                world[row].push(1)
             } 
             else {
-                world[i].push(Math.floor(Math.random() * 4));
-                output += "<div class = '"+ worldDict[world[i][x]] +"'></div>"
+                world[row].push(Math.floor(Math.random() * 4));
+                output += "<div class = '"+ worldDict[world[row][column]] +"'></div>"
             }
         }
         output += "</div>"
@@ -59,22 +48,22 @@ function drawNinjaman() {
 drawNinjaman()
 
 document.onkeydown = function(e){
-    if(e.keyCode == 37){
+    if(e.keyCode == 37){  // Turn Left
         if(world[ninjaman.y][ninjaman.x-1] != 1){
             ninjaman.x--
         }
     } 
-    if(e.keyCode == 39){
+    if(e.keyCode == 39){ // Turn Left
         if(world[ninjaman.y][ninjaman.x+1] !=1){
             ninjaman.x++
         }
     }
-    if(e.keyCode == 38){
+    if(e.keyCode == 38){ // Turn Up
         if(world[ninjaman.y-1][ninjaman.x] !=1){
         ninjaman.y--
         }
     }
-    if(e.keyCode == 40){
+    if(e.keyCode == 40){ // Turn Down
         if(world[ninjaman.y+1][ninjaman.x] !=1){
             ninjaman.y++
         }
